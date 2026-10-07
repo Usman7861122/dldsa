@@ -1,0 +1,17 @@
+---
+import ImageGrid from '../react/ImageGrid.tsx';
+import { services } from '../../data/content';
+---
+<section id="services" class="section bg-midnight">
+  <div class="wrap">
+    <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+      <h2 class="text-4xl font-light md:text-6xl">Our services</h2>
+      <p class="max-w-md text-lg text-ivory/70">
+        From a first exam to long-term care, everything for your digestive system and liver in one place.
+      </p>
+    </div>
+    <div class="mt-14" data-reveal>
+      <ImageGrid client:visible items={services} initial={6} aspect="aspect-[4/3]" moreLabel="View more services" lessLabel="Show fewer services" linkPrefix="Learn about" base="/services/" />
+    </div>
+  </div>
+</section>

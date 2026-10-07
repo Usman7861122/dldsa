@@ -1,0 +1,13 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import DetailPage from '../../components/ui/DetailPage.astro';
+import { serviceDetails } from '../../data/pages';
+
+export function getStaticPaths() {
+  return serviceDetails.map((d) => ({ params: { slug: d.slug }, props: { d } }));
+}
+const { d } = Astro.props;
+---
+<PageLayout title={d.name} description={`${d.name} care in San Antonio with Dr. Robert M. Narvaez. ${d.tagline}`}>
+  <DetailPage d={d} kind="service" />
+</PageLayout>

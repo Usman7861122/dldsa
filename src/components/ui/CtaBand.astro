@@ -1,0 +1,17 @@
+---
+import { practice } from '../../data/content';
+interface Props { title?: string; text?: string }
+const { title = 'Ready to feel better?', text = 'Call the office or send us a message. We will help you book a visit.' } = Astro.props;
+---
+<section class="relative isolate overflow-hidden bg-midnight py-20 lg:py-28">
+  <div class="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold/15"></div>
+  <div class="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[24rem] w-[24rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold/25"></div>
+  <div class="wrap text-center" data-reveal>
+    <h2 class="mx-auto max-w-3xl text-balance text-4xl font-light md:text-6xl">{title}</h2>
+    <p class="mx-auto mt-5 max-w-xl text-lg text-ivory/70">{text}</p>
+    <div class="mt-9 flex flex-wrap justify-center gap-4">
+      <a href="/contact/" class="btn-shiny"><span>Book an appointment</span></a>
+      <a href={practice.phoneHref} class="btn btn-line">Call {practice.phone}</a>
+    </div>
+  </div>
+</section>

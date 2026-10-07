@@ -1,0 +1,56 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { patientForms, prepForms, px, pool } from '../data/pages';
+---
+<PageLayout title="Patient Forms" description="Download patient forms and procedure prep guides for the Digestive & Liver Disease Center of San Antonio.">
+  <PageHero
+    title="Patient forms"
+    intro="Fill in your forms at home, and your visit will be faster and easier. All files are PDFs."
+    crumbs={[{ label: 'Patient resources' }, { label: 'Forms' }]}
+    image={px(pool.forms, 900)}
+    imageAlt="Medical forms stacked on a white counter"
+  />
+
+  <section class="section bg-ivory text-ink">
+    <div class="wrap grid gap-16 lg:grid-cols-2">
+      {[
+        { title: 'Before your visit', text: 'Forms for new and returning patients.', items: patientForms },
+        { title: 'Prepare for your procedure', text: 'Step-by-step guides. Follow them closely so your test can go well.', items: prepForms },
+      ].map((g, gi) => (
+        <div data-reveal style={`--i:${gi}`}>
+          <h2 class="text-4xl font-light">{g.title}</h2>
+          <p class="mt-3 text-lg text-ink/70">{g.text}</p>
+          <ul class="mt-8 space-y-3">
+            {g.items.map((f) => (
+              <li>
+                <a href={f.href} target="_blank" rel="noopener" class="group flex items-center gap-5 rounded-2xl bg-white p-5 ring-1 ring-ink/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-22px_rgba(20,35,63,.35)] hover:ring-gold">
+                  <span aria-hidden="true" class="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-gold text-[#a67a4f] transition-colors duration-500 group-hover:bg-gold group-hover:text-abyss">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+                  </span>
+                  <span class="flex-1 font-heading text-lg">{f.name}</span>
+                  <span class="text-sm text-ink/50">PDF<span class="sr-only"> (opens in a new tab)</span></span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section bg-midnight">
+    <div class="wrap grid items-center gap-14 lg:grid-cols-2">
+      <div data-reveal="left">
+        <h2 class="text-4xl font-light md:text-5xl">Can’t print them?</h2>
+        <p class="mt-5 max-w-md text-lg text-ivory/70">No problem. Come a few minutes early and we will give you paper copies, or call us and we will walk you through each one.</p>
+        <a href="/contact/" class="btn btn-gold mt-8">Contact us</a>
+      </div>
+      <div class="overflow-hidden rounded-3xl" data-reveal="right">
+        <img src={px(pool.writing, 1100)} alt="A doctor completing a form on a clipboard" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+      </div>
+    </div>
+  </section>
+  <CtaBand />
+</PageLayout>

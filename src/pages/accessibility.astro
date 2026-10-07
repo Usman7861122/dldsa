@@ -1,0 +1,45 @@
+---
+import LegalPage from '../components/ui/LegalPage.astro';
+import { practice } from '../data/content';
+---
+<LegalPage
+  title="Accessibility Policy"
+  description="Our commitment to making the Digestive & Liver Disease Center of San Antonio website usable by everyone."
+  updated="October 7, 2026"
+  intro="We want everyone to be able to use this website, including people who use screen readers, keyboards or other assistive tools."
+>
+  <h2>Our commitment</h2>
+  <p>The {practice.name} PLLC is committed to making this website easy to use for all of our patients and visitors, including people with disabilities. We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.1, Level AA.</p>
+
+  <h2>What we do</h2>
+  <ul>
+    <li>We use clear headings, lists and landmarks so screen readers can move around each page.</li>
+    <li>You can use the whole website with a keyboard. Focus is visible, and there is a “Skip to main content” link at the top of each page.</li>
+    <li>The menus work with a keyboard. The Escape key closes them.</li>
+    <li>We choose text and background colors that are easy to read.</li>
+    <li>Photos that carry meaning have text descriptions. Decorative photos are hidden from screen readers.</li>
+    <li>Buttons and links are large enough to tap and have clear names.</li>
+    <li>If your device is set to “reduce motion”, our animations are turned off.</li>
+    <li>Forms have labels and clear messages.</li>
+    <li>Pages work on phones, tablets and computers, and you can zoom in the browser.</li>
+  </ul>
+
+  <h2>Known limits</h2>
+  <p>We are always improving, and some things are still outside our control:</p>
+  <ul>
+    <li>The map and other content from outside companies (such as Google Maps) may not meet every accessibility standard.</li>
+    <li>Some PDF forms may not be fully accessible to screen readers. If you cannot use one, call us and we will help you fill it in another way.</li>
+  </ul>
+
+  <h2>Need help or have feedback?</h2>
+  <p>If you find a part of this website hard to use, or if you need information in another format, please tell us. We will do our best to help you quickly.</p>
+  <ul>
+    <li>Phone: <a href={practice.phoneHref}>{practice.phone}</a></li>
+    <li>Visit: {practice.address[0]}, {practice.address[1]}</li>
+    <li>Or use our <a href="/contact/">contact page</a></li>
+  </ul>
+  <p>Please tell us the page address and what problem you had, and what device or assistive tool you use if you can.</p>
+
+  <h2>In the office</h2>
+  <p>If you need help with access or communication when you visit, please tell us when you book. We will do our best to arrange it.</p>
+</LegalPage>

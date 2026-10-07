@@ -1,0 +1,72 @@
+---
+import LegalPage from '../components/ui/LegalPage.astro';
+import { practice } from '../data/content';
+---
+<LegalPage
+  title="Privacy Policy"
+  description="How the Digestive & Liver Disease Center of San Antonio collects, uses and protects information on this website."
+  updated="October 7, 2026"
+  intro="We respect your privacy. This page explains what information this website collects, why, and the choices you have."
+>
+  <h2>Who we are</h2>
+  <p>This website is run by the {practice.name} PLLC, {practice.address[0]}, {practice.address[1]}. In this policy, “we” and “us” mean the practice.</p>
+
+  <h2>This website is not for medical information</h2>
+  <p>Please do not send private health details, such as symptoms, test results or medicine lists, through our website forms or by regular email. These are not a secure way to share health information. To discuss your care, call us at <a href={practice.phoneHref}>{practice.phone}</a> or use our patient portal.</p>
+  <p>How we handle your health records at the office is described in our <a href="https://dldsa.com/wp-content/uploads/2025/05/201045.pdf" target="_blank" rel="noopener">HIPAA Notice of Privacy Policies (PDF)</a>. That notice, and not this page, covers your medical information.</p>
+
+  <h2>Information we may collect</h2>
+  <ul>
+    <li><strong>Information you give us.</strong> If you send us a message, we receive your name, email address, phone number and the message you write.</li>
+    <li><strong>Information collected automatically.</strong> Like most websites, our hosting may record technical details such as your IP address, browser type, device, the pages you visit and the time of your visit.</li>
+    <li><strong>Cookie choices.</strong> We store your cookie choice on your own device so we do not ask you again and again.</li>
+  </ul>
+
+  <h2>How we use it</h2>
+  <ul>
+    <li>To answer your message and help you book a visit</li>
+    <li>To keep the website working, safe and fast</li>
+    <li>To understand, in general terms, how the website is used, but only if you allow analytics cookies</li>
+  </ul>
+  <p>We do not sell your personal information.</p>
+
+  <h2>Cookies</h2>
+  <p>Cookies are small files that a website stores on your device. We use three kinds:</p>
+  <ul>
+    <li><strong>Necessary.</strong> These make the website work and remember your cookie choice. They are always on.</li>
+    <li><strong>Analytics.</strong> These help us see which pages are useful. They are off unless you say yes.</li>
+    <li><strong>Marketing.</strong> These are used for ads and social media. They are off unless you say yes.</li>
+  </ul>
+  <p>You can change your mind at any time with the “Cookie settings” link at the bottom of every page.</p>
+
+  <h2>Other companies’ services</h2>
+  <p>Some parts of this website use services from other companies. When they load, your browser connects to them, and they may receive your IP address and device details. They have their own privacy policies.</p>
+  <ul>
+    <li>Google Fonts, to show our typefaces</li>
+    <li>Google Maps, to show our location on the map</li>
+    <li>Unsplash, to show photos</li>
+    <li>Healow, if you choose to use our online patient portal</li>
+    <li>Facebook, if you follow a link to our page</li>
+  </ul>
+
+  <h2>Sharing your information</h2>
+  <p>We share information only with people who help us run the website and the practice, when the law requires it, or when you ask us to. They may use the information only for those purposes.</p>
+
+  <h2>How long we keep it</h2>
+  <p>We keep messages only as long as we need them to help you, or as the law requires.</p>
+
+  <h2>Keeping it safe</h2>
+  <p>We use reasonable steps to protect the information we hold. No website or internet connection is completely secure, which is another reason to keep health details off our forms.</p>
+
+  <h2>Your choices</h2>
+  <p>You may ask us what information we hold about you, ask us to correct it, or ask us to delete it. Call or write to us using the details below.</p>
+
+  <h2>Children</h2>
+  <p>This website is meant for adults. It is not aimed at children under 13, and we do not knowingly collect information from them.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>We may update this policy from time to time. The date at the top shows when it was last changed.</p>
+
+  <h2>Contact us</h2>
+  <p>{practice.name} PLLC<br />{practice.address[0]}, {practice.address[1]}<br />Phone: <a href={practice.phoneHref}>{practice.phone}</a> · Fax: {practice.fax}</p>
+</LegalPage>

@@ -1,0 +1,50 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import PhotoCard from '../../components/ui/PhotoCard.astro';
+import CtaBand from '../../components/ui/CtaBand.astro';
+import { services } from '../../data/content';
+import { px, pool } from '../../data/pages';
+import { slugify } from '../../lib/slug';
+---
+<PageLayout title="Our Services" description="Endoscopy, acid reflux, GERD, hemorrhoids, IBD, colon cancer, constipation and cirrhosis care in San Antonio.">
+  <PageHero
+    title="Our services"
+    intro="From a first exam to long-term care, everything for your digestive system and liver is in one place. Pick a service to learn more."
+    crumbs={[{ label: 'Services' }]}
+    image={px(pool.consult, 900)}
+    imageAlt="A doctor talking with a patient in a clinic"
+  />
+
+  <section class="section bg-midnight">
+    <div class="wrap">
+      <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {services.map((s, i) => (
+          <li data-reveal style={`--i:${i % 4}`}>
+            <PhotoCard href={`/services/${slugify(s.name)}/`} name={s.name} text={s.text} image={s.image} aspect="aspect-[4/5]" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-ivory text-ink">
+    <div class="wrap">
+      <h2 class="max-w-2xl text-4xl font-light md:text-6xl" data-reveal>How your visit works</h2>
+      <ol class="mt-14 grid gap-6 md:grid-cols-3">
+        {[
+          ['1', 'Call or write', 'Tell us what is going on. We will find a time that works for you.'],
+          ['2', 'Meet Dr. Narvaez', 'He listens, asks questions and explains things in plain words.'],
+          ['3', 'Get your plan', 'You leave knowing what is wrong, what to do next, and who to call.'],
+        ].map(([n, t, d], i) => (
+          <li class="rounded-3xl bg-white p-8 ring-1 ring-ink/5" data-reveal style={`--i:${i}`}>
+            <span class="grid h-12 w-12 place-items-center rounded-full border border-gold font-heading text-xl text-[#a67a4f]">{n}</span>
+            <h3 class="mt-6 text-2xl">{t}</h3>
+            <p class="mt-3 text-lg text-ink/70">{d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+  <CtaBand />
+</PageLayout>

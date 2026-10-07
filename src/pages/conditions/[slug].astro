@@ -1,0 +1,13 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import DetailPage from '../../components/ui/DetailPage.astro';
+import { conditionDetails } from '../../data/pages';
+
+export function getStaticPaths() {
+  return conditionDetails.map((d) => ({ params: { slug: d.slug }, props: { d } }));
+}
+const { d } = Astro.props;
+---
+<PageLayout title={d.name} description={`${d.name}: signs, causes and care. ${d.tagline}`}>
+  <DetailPage d={d} kind="condition" />
+</PageLayout>

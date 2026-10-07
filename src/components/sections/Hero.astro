@@ -1,0 +1,29 @@
+---
+import HeroMotion from '../react/HeroMotion.tsx';
+import { practice } from '../../data/content';
+---
+<section class="relative isolate overflow-hidden bg-abyss pt-32 lg:pt-40">
+  <div class="pointer-events-none absolute -right-40 -top-40 -z-10 h-[46rem] w-[46rem] rounded-full bg-[radial-gradient(circle,rgba(215,172,131,0.14),transparent_65%)]"></div>
+  <div class="pointer-events-none absolute -bottom-60 -left-40 -z-10 h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle,rgba(19,38,74,0.9),transparent_70%)]"></div>
+
+  <div class="wrap">
+    <HeroMotion client:load image="/images/Dr-Robert-M-Narvaez.webp" />
+  </div>
+
+  <div class="wrap mt-20 lg:mt-28">
+    <dl class="grid gap-8 border-t border-gold/25 py-9 sm:grid-cols-3">
+      <div>
+        <dt class="font-heading text-sm text-gold">Visit us</dt>
+        <dd class="mt-1 text-ivory/80">{practice.address[0]}<br />{practice.address[1]}</dd>
+      </div>
+      <div>
+        <dt class="font-heading text-sm text-gold">Open</dt>
+        <dd class="mt-1 text-ivory/80">Mon to Thu, 8 am to 5 pm<br />Fri, 8 am to 12:30 pm</dd>
+      </div>
+      <div>
+        <dt class="font-heading text-sm text-gold">Call</dt>
+        <dd class="mt-1"><a href={practice.phoneHref} class="ulink text-ivory/90">{practice.phone}</a></dd>
+      </div>
+    </dl>
+  </div>
+</section>

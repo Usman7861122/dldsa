@@ -1,0 +1,17 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from './PageHero.astro';
+interface Props { title: string; description: string; updated: string; intro: string }
+const { title, description, updated, intro } = Astro.props;
+---
+<PageLayout title={title} description={description}>
+  <PageHero title={title} intro={intro} crumbs={[{ label: title }]} />
+  <section class="section bg-ivory text-ink">
+    <div class="wrap">
+      <div class="legal mx-auto max-w-3xl">
+        <p class="text-sm text-ink/55">Last updated: {updated}</p>
+        <slot />
+      </div>
+    </div>
+  </section>
+</PageLayout>

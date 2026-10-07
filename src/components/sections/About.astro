@@ -1,0 +1,41 @@
+---
+import { practice } from '../../data/content';
+---
+<section id="about" class="section bg-ivory text-ink">
+  <div class="wrap grid items-center gap-16 lg:grid-cols-12">
+    <div class="lg:col-span-5" data-reveal="left">
+      <div class="group relative mx-auto aspect-[4/5] w-full max-w-md">
+        <div class="absolute inset-0 rounded-t-[999px] rounded-b-3xl border border-gold transition-transform duration-700 ease-out group-hover:translate-x-4 group-hover:translate-y-4"></div>
+        <div class="absolute inset-0 overflow-hidden rounded-t-[999px] rounded-b-3xl bg-midnight">
+          <img
+            src="/images/Dr-Robert-M-Narvaez.webp"
+            alt="Dr. Robert M. Narvaez smiling, wearing a dark suit"
+            width="408" height="510" loading="lazy"
+            class="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7" data-reveal="right">
+      <h2 class="text-4xl font-light md:text-6xl">Meet Dr. Robert M. Narvaez</h2>
+      <div class="mt-8 max-w-xl space-y-5 text-lg leading-relaxed text-ink/80">
+        <p>
+          Dr. Narvaez is a gastroenterologist in San Antonio. He is known as one of the city’s top colon cancer specialists.
+        </p>
+        <p>
+          At the {practice.name} he cares for the stomach, colon, liver and gallbladder, from everyday heartburn to cirrhosis.
+          His patients say he listens, takes his time and explains things in plain words.
+        </p>
+      </div>
+
+      <ul class="mt-10 grid max-w-xl gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 sm:grid-cols-3">
+        <li class="bg-ivory p-5 transition-colors duration-500 hover:bg-sand"><p class="font-heading text-2xl text-ink">MD, MBA</p><p class="text-sm text-ink/65">Medicine and business</p></li>
+        <li class="bg-ivory p-5 transition-colors duration-500 hover:bg-sand"><p class="font-heading text-2xl text-ink">Gastro</p><p class="text-sm text-ink/65">Digestive and liver care</p></li>
+        <li class="bg-ivory p-5 transition-colors duration-500 hover:bg-sand"><p class="font-heading text-2xl text-ink">Colon</p><p class="text-sm text-ink/65">Cancer specialist</p></li>
+      </ul>
+
+      <a href={practice.phoneHref} class="btn btn-ink mt-10">Call the office</a>
+    </div>
+  </div>
+</section>

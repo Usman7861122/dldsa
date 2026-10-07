@@ -1,0 +1,55 @@
+---
+import LegalPage from '../components/ui/LegalPage.astro';
+import { practice } from '../data/content';
+---
+<LegalPage
+  title="Terms & Conditions"
+  description="The terms for using the Digestive & Liver Disease Center of San Antonio website."
+  updated="October 7, 2026"
+  intro="Please read these terms before you use our website. By using it, you agree to them."
+>
+  <h2>About this website</h2>
+  <p>This website belongs to the {practice.name} PLLC, {practice.address[0]}, {practice.address[1]} (“we”, “us”). It gives general information about our practice and our services.</p>
+
+  <h2>Not medical advice</h2>
+  <p>Everything on this website is for general information only. It is not medical advice, and it does not replace a visit with a doctor. Never ignore professional advice, or wait to get it, because of something you read here.</p>
+
+  <h2>No doctor–patient relationship</h2>
+  <p>Using this website, reading it or sending us a message does not create a doctor–patient relationship. That relationship begins only when you are seen by Dr. Narvaez or our clinical team.</p>
+
+  <h2>In an emergency</h2>
+  <p><strong>If you think you have a medical emergency, call 911 or go to the nearest emergency room.</strong> Do not use this website or our contact form for emergencies.</p>
+
+  <h2>Using the website</h2>
+  <p>You agree to use this website only for lawful purposes. You agree not to:</p>
+  <ul>
+    <li>Try to break into, damage or overload the website or its servers</li>
+    <li>Use the website to send spam or harmful code</li>
+    <li>Pretend to be another person, or give false information in our forms</li>
+    <li>Copy or collect content from the website by automated means without our written permission</li>
+  </ul>
+
+  <h2>Messages and forms</h2>
+  <p>Please do not put private health details in our contact form. We cannot promise that a message sent through the website will be read right away. For anything urgent, call the office.</p>
+
+  <h2>Our content</h2>
+  <p>The text, design, logo and other material on this website belong to us or are used with permission. You may view and print pages for your own personal use. You may not copy, sell or reuse them otherwise without our written permission. Photos on this website may be provided by third parties such as Unsplash and are used for illustration only. They do not show our patients.</p>
+
+  <h2>Links to other websites</h2>
+  <p>We link to other websites that may be useful. We do not control them and are not responsible for what they say or do. A link is not an endorsement.</p>
+
+  <h2>Accuracy</h2>
+  <p>We try to keep this website correct and up to date, but we cannot promise that everything on it is complete or current. Office hours, insurance plans accepted and other details can change. Please call us to confirm.</p>
+
+  <h2>Limit of liability</h2>
+  <p>To the fullest extent allowed by law, we are not responsible for any loss or harm that comes from using this website or relying on what is on it. The website is provided “as is”.</p>
+
+  <h2>Governing law</h2>
+  <p>These terms are governed by the laws of the State of Texas. Any dispute will be handled in the courts of Bexar County, Texas.</p>
+
+  <h2>Changes</h2>
+  <p>We may change these terms at any time. The new version applies from the day it is posted. The date at the top shows when it was last updated.</p>
+
+  <h2>Contact us</h2>
+  <p>{practice.name} PLLC<br />{practice.address[0]}, {practice.address[1]}<br />Phone: <a href={practice.phoneHref}>{practice.phone}</a></p>
+</LegalPage>

@@ -1,0 +1,14 @@
+---
+import Testimonials from '../react/Testimonials.tsx';
+import { testimonials } from '../../data/content';
+---
+<section id="reviews" class="section bg-midnight">
+  <div class="wrap">
+    <h2 data-reveal class="mx-auto max-w-3xl text-center text-4xl font-light md:text-6xl">Reviews from real patients</h2>
+    <p data-reveal style="--i:1" class="mx-auto mt-5 max-w-xl text-center text-lg text-ivory/65">Kind words from the people we care for.</p>
+    <div class="mt-16 lg:mt-20" data-reveal style="--i:2">
+      <Testimonials client:visible items={testimonials} />
+    </div>
+    <p class="mt-12 text-center" data-reveal><a href="/reviews/" class="ulink font-heading text-lg text-gold-soft">Read more patient reviews</a></p>
+  </div>
+</section>

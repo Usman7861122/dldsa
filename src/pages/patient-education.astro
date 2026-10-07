@@ -1,0 +1,66 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { services, conditions } from '../data/content';
+import { helpfulLinks, px, pool } from '../data/pages';
+import { slugify } from '../lib/slug';
+---
+<PageLayout title="Patient Education" description="Learn about digestive and liver conditions. Being well informed is one of the best ways to fight a disease.">
+  <PageHero
+    title="Patient education"
+    intro="Being well informed about a digestive or liver condition is one of the most important parts of fighting it. Start here."
+    crumbs={[{ label: 'Patient resources' }, { label: 'Patient education' }]}
+    image={px(pool.writing, 900)}
+    imageAlt="A doctor writing notes on a clipboard"
+  />
+
+  <section class="section bg-ivory text-ink">
+    <div class="wrap">
+      <div class="grid gap-14 lg:grid-cols-2">
+        <div data-reveal="left">
+          <h2 class="text-4xl font-light md:text-5xl">Learn about our services</h2>
+          <p class="mt-5 max-w-md text-lg text-ink/70">Plain-language pages on the care we offer.</p>
+          <ul class="mt-8 divide-y divide-ink/10 border-y border-ink/10">
+            {services.map((s) => (
+              <li><a href={`/services/${slugify(s.name)}/`} class="group flex items-center justify-between py-4 text-lg transition-colors hover:text-[#a67a4f]"><span>{s.name}</span><span aria-hidden="true" class="transition-transform duration-500 group-hover:translate-x-2">→</span></a></li>
+            ))}
+          </ul>
+        </div>
+        <div data-reveal="right">
+          <h2 class="text-4xl font-light md:text-5xl">Learn about conditions</h2>
+          <p class="mt-5 max-w-md text-lg text-ink/70">Signs, causes and when to get help.</p>
+          <ul class="mt-8 divide-y divide-ink/10 border-y border-ink/10">
+            {conditions.map((c) => (
+              <li><a href={`/conditions/${slugify(c.name)}/`} class="group flex items-center justify-between py-4 text-lg transition-colors hover:text-[#a67a4f]"><span>{c.name}</span><span aria-hidden="true" class="transition-transform duration-500 group-hover:translate-x-2">→</span></a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-midnight">
+    <div class="wrap grid items-center gap-14 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal="left">
+        <div class="group overflow-hidden rounded-3xl">
+          <img src={px(pool.fruit, 1000)} alt="Fresh fruit and vegetables arranged around a wooden board" loading="lazy" class="aspect-[4/5] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
+        </div>
+      </div>
+      <div class="lg:col-span-7" data-reveal="right">
+        <h2 class="text-4xl font-light md:text-5xl">Trusted places to read more</h2>
+        <ul class="mt-9 space-y-4">
+          {helpfulLinks.map((l) => (
+            <li>
+              <a href={l.href} target="_blank" rel="noopener" class="group block rounded-2xl border border-gold/25 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gold/70 hover:bg-white/[.04]">
+                <span class="font-heading text-xl text-gold-soft">{l.name} <span class="sr-only">(opens in a new tab)</span><span aria-hidden="true" class="inline-block transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span></span>
+                <span class="mt-2 block text-ivory/70">{l.text}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+  <CtaBand title="Have a question?" text="Reading is a good start. A real conversation is better. Call us any time during office hours." />
+</PageLayout>

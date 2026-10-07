@@ -1,0 +1,48 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { reviews, googleReviewsLink, px, pool } from '../data/pages';
+---
+<PageLayout title="Patient Reviews" description="Read what patients say about Dr. Robert M. Narvaez and the Digestive & Liver Disease Center of San Antonio.">
+  <PageHero
+    title="Reviews from real patients"
+    eyebrow="Testimonials"
+    intro="Kind words from the people we care for. We are thankful for each one."
+    crumbs={[{ label: 'Testimonials' }]}
+    image={px(pool.smile, 900)}
+    imageAlt="A smiling doctor talking with an older patient"
+  >
+    <a href={googleReviewsLink} target="_blank" rel="noopener" class="btn btn-gold">See us on Google <span class="sr-only">(opens in a new tab)</span></a>
+  </PageHero>
+
+  <section class="section bg-midnight">
+    <div class="wrap">
+      <ul class="columns-1 gap-6 md:columns-2 lg:columns-3 [&>li]:mb-6">
+        {reviews.map((r, i) => (
+          <li class="break-inside-avoid" data-reveal style={`--i:${i % 3}`}>
+            <figure class="group relative rounded-[1.75rem] rounded-bl-md bg-ivory p-8 text-ink transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,.6)]">
+              <svg aria-hidden="true" width="34" height="26" viewBox="0 0 34 26" class="text-gold"><path fill="currentColor" d="M0 26V14.2C0 6.2 4.4 1.4 12 0l1.4 3.6C9.6 5 7.6 7.6 7.4 11H13v15H0Zm20.6 0V14.2C20.6 6.2 25 1.4 32.6 0L34 3.6C30.2 5 28.2 7.6 28 11h5.6v15H20.6Z"/></svg>
+              <blockquote class="mt-4 text-lg leading-relaxed text-ink/85">{r.text}</blockquote>
+              <figcaption class="mt-6 flex items-center gap-4">
+                <span aria-hidden="true" class="grid h-11 w-11 place-items-center rounded-full bg-ink font-heading text-sm text-gold">{r.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>
+                <span><span class="block font-heading">{r.name}</span><span class="block text-sm text-ink/55">Patient · {r.date}</span></span>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+      <p class="mx-auto mt-10 max-w-2xl text-center text-sm text-ivory/50" data-reveal>These are real reviews from patients, taken from our previous website. Names are shortened to protect privacy.</p>
+    </div>
+  </section>
+
+  <section class="relative isolate overflow-hidden bg-abyss">
+    <img src={px(pool.team, 1800)} alt="" loading="lazy" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-40" />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-abyss via-abyss/85 to-abyss/40"></div>
+    <div class="wrap py-24 lg:py-32" data-reveal>
+      <p class="max-w-2xl text-balance font-heading text-3xl font-light leading-snug md:text-5xl">Had a good visit? Tell others about it.</p>
+      <a href={googleReviewsLink} target="_blank" rel="noopener" class="btn btn-gold mt-9">Leave a review on Google <span class="sr-only">(opens in a new tab)</span></a>
+    </div>
+  </section>
+  <CtaBand title="Join the patients who trust us" />
+</PageLayout>

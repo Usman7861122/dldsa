@@ -1,0 +1,73 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { practice } from '../data/content';
+import { px, pool } from '../data/pages';
+---
+<PageLayout title="Office Policies" description="Cancellation, payment and insurance policies at the Digestive & Liver Disease Center of San Antonio.">
+  <PageHero
+    title="Office policies"
+    intro="A few simple things that help your visit go smoothly. If anything here worries you, please call us before your visit."
+    crumbs={[{ label: 'Patient resources' }, { label: 'Policies' }]}
+    image={px(pool.papers, 900)}
+    imageAlt="Medical forms and notes on a wooden table"
+  />
+
+  <section class="section bg-ivory text-ink">
+    <div class="wrap grid gap-14 lg:grid-cols-12">
+      <div class="space-y-14 lg:col-span-8" data-reveal>
+        <div>
+          <h2 class="text-3xl font-light md:text-4xl">Cancellation policy</h2>
+          <span class="mt-4 block h-px w-14 bg-gold"></span>
+          <p class="mt-5 text-lg leading-relaxed text-ink/80">If you need to cancel an appointment, please tell us at least 24 hours ahead. Appointments cancelled with less notice have a <strong class="font-normal text-ink">$15 fee</strong>.</p>
+        </div>
+        <div>
+          <h2 class="text-3xl font-light md:text-4xl">What to bring</h2>
+          <span class="mt-4 block h-px w-14 bg-gold"></span>
+          <ul class="mt-5 space-y-3 text-lg text-ink/80">
+            <li class="flex gap-4"><span aria-hidden="true" class="mt-[.7rem] h-2 w-2 shrink-0 rounded-full border border-gold bg-gold/30"></span>Your current driver’s license or other photo ID</li>
+            <li class="flex gap-4"><span aria-hidden="true" class="mt-[.7rem] h-2 w-2 shrink-0 rounded-full border border-gold bg-gold/30"></span>Your insurance cards</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-3xl font-light md:text-4xl">Financial policy</h2>
+          <span class="mt-4 block h-px w-14 bg-gold"></span>
+          <p class="mt-5 text-lg leading-relaxed text-ink/80">We want to give you good medical care, and we ask for your help with payment terms so we can keep doing that. Charges for first visits, follow-up visits and other treatments are due when the service is given.</p>
+          <h3 class="mt-8 text-xl">Ways to pay</h3>
+          <ul class="mt-3 space-y-3 text-lg text-ink/80">
+            <li class="flex gap-4"><span aria-hidden="true" class="mt-[.7rem] h-2 w-2 shrink-0 rounded-full border border-gold bg-gold/30"></span>Cash, personal checks and money orders</li>
+            <li class="flex gap-4"><span aria-hidden="true" class="mt-[.7rem] h-2 w-2 shrink-0 rounded-full border border-gold bg-gold/30"></span>American Express, MasterCard and Visa</li>
+          </ul>
+          <p class="mt-5 text-lg leading-relaxed text-ink/80">If a check is returned, payment must then be made in cash, and a $35 service fee applies.</p>
+        </div>
+        <div>
+          <h2 class="text-3xl font-light md:text-4xl">Insurance</h2>
+          <span class="mt-4 block h-px w-14 bg-gold"></span>
+          <p class="mt-5 text-lg leading-relaxed text-ink/80">We send your insurance claims for you as a courtesy. Your insurance policy is a contract between you and your insurance company. We are not a party to that contract.</p>
+          <p class="mt-4 text-lg leading-relaxed text-ink/80">You are responsible for deductibles, co-insurance and any amounts your plan does not cover. Accounts more than 60 days overdue are sent to collections.</p>
+        </div>
+        <div>
+          <h2 class="text-3xl font-light md:text-4xl">Money worries?</h2>
+          <span class="mt-4 block h-px w-14 bg-gold"></span>
+          <p class="mt-5 text-lg leading-relaxed text-ink/80">If paying is hard for you, please call us before your treatment so we can talk about it together.</p>
+        </div>
+      </div>
+
+      <aside class="lg:col-span-4" data-reveal="right">
+        <div class="space-y-6 lg:sticky lg:top-28">
+          <div class="overflow-hidden rounded-3xl bg-sand">
+            <img src={px(pool.forms, 800)} alt="Medical forms stacked on a white counter" loading="lazy" class="aspect-[4/3] w-full object-cover" />
+          </div>
+          <div class="rounded-3xl bg-midnight p-8 text-ivory">
+            <p class="font-heading text-2xl">Need the forms?</p>
+            <p class="mt-3 text-ivory/70">You can download and fill in your forms before your visit.</p>
+            <a href="/forms/" class="btn btn-gold mt-6">Go to forms</a>
+            <p class="mt-6 text-sm text-ivory/60">Questions? Call <a href={practice.phoneHref} class="ulink text-gold-soft">{practice.phone}</a></p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+  <CtaBand title="Questions about a policy?" />
+</PageLayout>

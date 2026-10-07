@@ -1,0 +1,83 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import CtaBand from '../components/ui/CtaBand.astro';
+import { practice } from '../data/content';
+import { aboutDoctor as a, px, pool } from '../data/pages';
+---
+<PageLayout title="About Us" description="Meet Dr. Robert M. Narvaez, MD, MBA, a San Antonio gastroenterologist and one of the city’s top colon cancer specialists.">
+  <PageHero
+    title="Meet Dr. Robert M. Narvaez"
+    eyebrow="About us"
+    intro="Dr. Narvaez is a gastroenterologist known as one of the top colon cancer specialists in San Antonio, Texas. He is known for personal care and for taking the time to listen."
+    crumbs={[{ label: 'About us' }]}
+    image="/images/Dr-Robert-M-Narvaez.webp"
+    imageAlt="Dr. Robert M. Narvaez smiling, wearing a dark suit"
+  >
+    <a href="/contact/" class="btn-shiny"><span>Book an appointment</span></a>
+    <a href={practice.phoneHref} class="btn btn-line">Call {practice.phone}</a>
+  </PageHero>
+
+  <section class="section bg-ivory text-ink">
+    <div class="wrap grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-6" data-reveal="left">
+        <h2 class="text-4xl font-light md:text-5xl">Our care, in plain words</h2>
+        <div class="mt-8 space-y-5 text-lg leading-relaxed text-ink/80">
+          <p>At the {practice.name} we care for the stomach, colon, liver and gallbladder, from everyday heartburn to cirrhosis and colon cancer.</p>
+          <p>Our patients tell us the same things again and again: Dr. Narvaez listens, he explains every detail, and he never makes them feel rushed. Some have trusted him for 30 years.</p>
+          <p>His training in both medicine and business means he looks at the whole picture: your health, your time and your peace of mind.</p>
+        </div>
+      </div>
+      <div class="lg:col-span-6" data-reveal="right">
+        <div class="group overflow-hidden rounded-3xl bg-sand">
+          <img src={px(pool.consult, 1200)} alt="A doctor talking with a patient at his desk" loading="lazy" class="aspect-[4/3] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-midnight">
+    <div class="wrap">
+      <h2 class="text-4xl font-light md:text-6xl" data-reveal>Education and training</h2>
+      <ol class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {a.education.map((e, i) => (
+          <li class="group rounded-3xl border border-gold/25 bg-white/[.03] p-8 transition-all duration-500 hover:-translate-y-2 hover:border-gold/70 hover:bg-white/[.06]" data-reveal style={`--i:${i % 3}`}>
+            <span class="font-heading text-sm text-gold">Step {i + 1}</span>
+            <h3 class="mt-3 text-2xl">{e.what}</h3>
+            <p class="mt-3 text-ivory/70">{e.where}</p>
+            {e.note && <p class="mt-2 text-sm text-gold-soft">{e.note}</p>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section bg-sand text-ink">
+    <div class="wrap grid gap-16 lg:grid-cols-2">
+      <div data-reveal>
+        <h2 class="text-3xl font-light md:text-4xl">Professional experience</h2>
+        <span class="mt-4 block h-px w-14 bg-gold"></span>
+        <ul class="mt-6 space-y-4">
+          {a.experience.map((x) => <li class="flex gap-4 text-lg text-ink/80"><span aria-hidden="true" class="mt-[.7rem] h-2 w-2 shrink-0 rounded-full border border-gold bg-gold/30"></span><span>{x}</span></li>)}
+        </ul>
+      </div>
+      <div data-reveal style="--i:1">
+        <h2 class="text-3xl font-light md:text-4xl">Professional memberships</h2>
+        <span class="mt-4 block h-px w-14 bg-gold"></span>
+        <ul class="mt-6 space-y-4">
+          {a.memberships.map((x) => <li class="flex gap-4 text-lg text-ink/80"><span aria-hidden="true" class="mt-[.7rem] h-2 w-2 shrink-0 rounded-full border border-gold bg-gold/30"></span><span>{x}</span></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative isolate overflow-hidden bg-abyss">
+    <img src={px(pool.team, 1800)} alt="" loading="lazy" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-40" />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-abyss via-abyss/85 to-abyss/40"></div>
+    <div class="wrap py-24 lg:py-32" data-reveal>
+      <h2 class="text-4xl font-light md:text-5xl">In the community</h2>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ivory/80">{a.community}</p>
+    </div>
+  </section>
+  <CtaBand title="Come and meet him" />
+</PageLayout>

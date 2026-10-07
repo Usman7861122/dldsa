@@ -1,0 +1,31 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import PhotoCard from '../../components/ui/PhotoCard.astro';
+import CtaBand from '../../components/ui/CtaBand.astro';
+import { conditions } from '../../data/content';
+import { px, pool } from '../../data/pages';
+import { slugify } from '../../lib/slug';
+---
+<PageLayout title="Conditions We Treat" description="Constipation, appendicitis, colon cancer, esophageal cancer, gallstones, heartburn, hemorrhoids and fatty liver: signs, causes and care.">
+  <PageHero
+    title="Conditions we treat"
+    intro="If you have one of these, or you just are not sure what is wrong, we can help you find answers. Pick a condition to read about its signs and treatment."
+    crumbs={[{ label: 'Conditions' }]}
+    image={px(pool.consult2, 900)}
+    imageAlt="A doctor talking with a patient in a bright clinic"
+  />
+  <section class="section bg-ivory text-ink">
+    <div class="wrap">
+      <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {conditions.map((c, i) => (
+          <li data-reveal style={`--i:${i % 4}`} class="text-ivory">
+            <PhotoCard href={`/conditions/${slugify(c.name)}/`} name={c.name} text={c.text} image={c.image} aspect="aspect-[4/5]" />
+          </li>
+        ))}
+      </ul>
+      <p class="mt-12 max-w-2xl text-ink/65" data-reveal>Do not see your problem here? Call us. We treat many other stomach, colon, liver and gallbladder conditions too.</p>
+    </div>
+  </section>
+  <CtaBand title="Not sure what is wrong?" text="You do not need a diagnosis to call. Tell us your symptoms and we will help." />
+</PageLayout>

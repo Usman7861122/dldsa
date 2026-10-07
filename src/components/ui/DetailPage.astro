@@ -1,0 +1,115 @@
+---
+import PageHero from './PageHero.astro';
+import CtaBand from './CtaBand.astro';
+import { practice, services } from '../../data/content';
+import { px, serviceDetails, conditionDetails, type Detail } from '../../data/pages';
+
+interface Props { d: Detail; kind: 'service' | 'condition' }
+const { d, kind } = Astro.props;
+const base = kind === 'service' ? '/services/' : '/conditions/';
+const list = kind === 'service' ? serviceDetails : conditionDetails;
+const related = (d.related ?? []).map((r) => {
+  if (r.startsWith('service:')) { const x = serviceDetails.find((s) => s.slug === r.slice(8)); return x && { ...x, href: `/services/${x.slug}/` }; }
+  const x = list.find((s) => s.slug === r); return x && { ...x, href: `${base}${x.slug}/` };
+}).filter(Boolean) as (Detail & { href: string })[];
+const [img1, img2, img3] = d.images;
+---
+<PageHero
+  title={d.name}
+  intro={d.intro}
+  eyebrow={kind === 'service' ? 'Our services' : 'Conditions we treat'}
+  crumbs={[{ label: kind === 'service' ? 'Services' : 'Conditions', href: base }, { label: d.name }]}
+  image={px(img1, 900)}
+  imageAlt={`${d.name}: a photo that goes with this topic`}
+>
+  <a href="/contact/" class="btn-shiny"><span>Book an appointment</span></a>
+  <a href={practice.phoneHref} class="btn btn-line">Call {practice.phone}</a>
+</PageHero>
+
+<section class="section bg-ivory text-ink">
+  <div class="wrap grid gap-14 lg:grid-cols-12">
+    <div class="lg:col-span-7" data-reveal>
+      {d.emergency && (
+        <div role="note" class="mb-10 rounded-2xl border border-[#b4533a]/40 bg-[#b4533a]/10 p-6">
+          <p class="font-heading text-lg text-[#8a3a26]">When to get urgent help</p>
+          <p class="mt-2 text-ink/80">{d.emergency}</p>
+        </div>
+      )}
+      {d.facts && (
+        <ul class="mb-12 grid gap-4 sm:grid-cols-2">
+          {d.facts.map((f) => (
+            <li class="rounded-3xl bg-ink p-7 text-ivory">
+              <p class="font-heading text-5xl font-light text-gold">{f.big}</p>
+              <p class="mt-2 text-ivory/75">{f.label}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div class="space-y-12">
+        {d.sections.map((s) => (
+          <section>
+            <h2 class="text-3xl font-light md:text-4xl">{s.h}</h2>
+            <span class="mt-4 block h-px w-14 bg-gold"></span>
+            {s.p?.map((t) => <p class="mt-5 text-lg leading-relaxed text-ink/80">{t}</p>)}
+            {s.list && (
+              <ul class="mt-5 space-y-3">
+                {s.list.map((li) => (
+                  <li class="flex gap-4 text-lg leading-relaxed text-ink/80">
+                    <span aria-hidden="true" class="mt-[.7rem] h-2 w-2 shrink-0 rounded-full border border-gold bg-gold/30"></span>
+                    <span>{li}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))}
+      </div>
+      <p class="mt-14 text-sm text-ink/55">This page is general information. It is not medical advice. Dr. Narvaez will explain what is right for you.</p>
+    </div>
+
+    <aside class="lg:col-span-5" data-reveal="right">
+      <div class="space-y-6 lg:sticky lg:top-28">
+        <div class="group overflow-hidden rounded-3xl bg-sand">
+          <img src={px(img2, 900)} alt="" loading="lazy" class="aspect-[4/3] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
+        </div>
+        <div class="rounded-3xl bg-midnight p-8 text-ivory">
+          <p class="font-heading text-2xl">Talk to Dr. Narvaez</p>
+          <p class="mt-3 text-ivory/70">If this sounds like you, call us. We will help you book a visit.</p>
+          <a href={practice.phoneHref} class="mt-5 block font-heading text-2xl text-gold-soft">{practice.phone}</a>
+          <p class="mt-3 text-sm text-ivory/60">Mon to Thu, 8 am to 5 pm<br />Fri, 8 am to 12:30 pm</p>
+          <a href="/contact/" class="btn-shiny mt-6"><span>Book an appointment</span></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="relative isolate overflow-hidden bg-abyss">
+  <img src={px(img3, 1800)} alt="" loading="lazy" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-50" />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-abyss via-abyss/80 to-abyss/30"></div>
+  <div class="wrap py-24 lg:py-32" data-reveal>
+    <p class="max-w-2xl text-balance font-heading text-3xl font-light leading-snug md:text-5xl">You will never be rushed. Your questions always get a clear answer.</p>
+    <a href="/contact/" class="btn-shiny mt-9"><span>Meet Dr. Narvaez</span></a>
+  </div>
+</section>
+
+{related.length > 0 && (
+  <section class="section bg-sand text-ink">
+    <div class="wrap">
+      <h2 class="text-3xl font-light md:text-5xl" data-reveal>Related care</h2>
+      <ul class="mt-10 grid gap-5 md:grid-cols-3">
+        {related.map((r, i) => (
+          <li data-reveal style={`--i:${i}`}>
+            <a href={r.href} class="group block h-full rounded-3xl bg-white p-7 ring-1 ring-ink/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_50px_-20px_rgba(20,35,63,.35)] hover:ring-gold">
+              <p class="font-heading text-2xl">{r.name}</p>
+              <p class="mt-3 text-ink/70">{r.tagline}</p>
+              <span class="ulink mt-6 inline-block font-heading">Read more</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<CtaBand />

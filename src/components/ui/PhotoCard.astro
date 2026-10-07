@@ -1,0 +1,14 @@
+---
+interface Props { href: string; name: string; text: string; image: string; aspect?: string; label?: string }
+const { href, name, text, image, aspect = 'aspect-[4/3]', label = 'Learn more' } = Astro.props;
+---
+<a href={href} class={`group relative block ${aspect} overflow-hidden rounded-3xl bg-midnight text-ivory`}>
+  <img src={image} alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110" />
+  <div class="absolute inset-0 bg-gradient-to-t from-abyss/95 via-abyss/55 to-abyss/10"></div>
+  <span class="absolute inset-0 rounded-3xl ring-1 ring-inset ring-gold/0 transition-all duration-500 group-hover:ring-gold/70"></span>
+  <div class="absolute inset-x-0 bottom-0 p-6 md:p-7">
+    <h3 class="font-heading text-2xl font-normal md:text-[1.7rem]">{name}</h3>
+    <p class="mt-2 max-w-sm text-ivory/80 transition-all duration-500 md:max-h-0 md:translate-y-2 md:opacity-0 md:group-hover:max-h-24 md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-visible:max-h-24 md:group-focus-visible:opacity-100">{text}</p>
+    <span class="mt-3 inline-flex items-center gap-2 font-heading text-sm text-gold-soft">{label} <span aria-hidden="true" class="transition-transform duration-500 group-hover:translate-x-1.5">→</span></span>
+  </div>
+</a>

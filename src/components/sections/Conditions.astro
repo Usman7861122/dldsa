@@ -1,0 +1,17 @@
+---
+import ImageGrid from '../react/ImageGrid.tsx';
+import { conditions } from '../../data/content';
+---
+<section id="conditions" class="section bg-ivory text-ink">
+  <div class="wrap">
+    <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+      <h2 class="text-4xl font-light md:text-6xl">Conditions we treat</h2>
+      <p class="max-w-md text-lg text-ink/70">
+        If you have one of these, or just aren’t sure what is wrong, we can help you find answers.
+      </p>
+    </div>
+    <div class="mt-14 text-ivory" data-reveal>
+      <ImageGrid client:visible items={conditions} initial={6} aspect="aspect-[4/5]" moreLabel="View more conditions" lessLabel="Show fewer conditions" linkPrefix="Read about" base="/conditions/" />
+    </div>
+  </div>
+</section>

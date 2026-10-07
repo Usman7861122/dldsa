@@ -1,0 +1,18 @@
+---
+import Procedures from '../react/Procedures.tsx';
+import { procedures } from '../../data/content';
+---
+<section id="procedures" class="section bg-abyss">
+  <div class="wrap">
+    <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+      <h2 class="text-4xl font-light md:text-6xl">Our procedures</h2>
+      <p class="max-w-md text-lg text-ivory/70">
+        Each one is done with care and with your comfort first. Pick one to see what it means.
+      </p>
+    </div>
+    <div class="mt-14" data-reveal="scale">
+      <Procedures client:visible items={procedures} />
+    </div>
+    <p class="mt-6 text-sm text-ivory/45">General information only. Dr. Narvaez will explain what is right for you.</p>
+  </div>
+</section>

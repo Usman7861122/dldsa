@@ -1,0 +1,43 @@
+---
+import ContactForm from '../react/ContactForm.tsx';
+import { practice } from '../../data/content';
+---
+<section id="contact" class="section bg-midnight">
+  <div class="wrap">
+    <h2 data-reveal class="text-4xl font-light md:text-6xl">Get in touch</h2>
+    <p data-reveal style="--i:1" class="mt-6 max-w-xl text-lg text-ivory/70">Send us a message or call the office. We will help you book a visit.</p>
+
+    <div class="mt-14 grid items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
+      <div class="flex flex-col justify-center" data-reveal="left">
+        <ContactForm client:visible />
+      </div>
+
+      <div data-reveal="right" class="group relative min-h-[22rem] overflow-hidden rounded-3xl border border-gold/30 lg:min-h-[30rem]">
+        <iframe
+          title="Map showing the Digestive & Liver Disease Center of San Antonio"
+          src={practice.mapSrc}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="absolute inset-0 h-full w-full border-0 opacity-90 grayscale invert-[.92] hue-rotate-180 contrast-[.9] transition-all duration-700 group-hover:opacity-100 group-hover:grayscale-0 group-hover:invert-0 group-hover:hue-rotate-0 group-hover:contrast-100"
+        ></iframe>
+      </div>
+    </div>
+
+    <dl data-reveal class="mt-14 grid gap-8 border-t border-gold/25 pt-10 sm:grid-cols-3">
+      <div>
+        <dt class="font-heading text-sm text-gold">Address</dt>
+        <dd class="mt-2 text-ivory/80">{practice.address[0]}<br />{practice.address[1]}</dd>
+      </div>
+      <div>
+        <dt class="font-heading text-sm text-gold">Phone and fax</dt>
+        <dd class="mt-2 text-ivory/80"><a href={practice.phoneHref} class="ulink">{practice.phone}</a><br />Fax {practice.fax}</dd>
+      </div>
+      <div>
+        <dt class="font-heading text-sm text-gold">Hours</dt>
+        <dd class="mt-2 text-ivory/80">
+          {practice.hours.map((h) => <span class="block">{h.days}: {h.time}</span>)}
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>

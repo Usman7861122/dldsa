@@ -1,0 +1,27 @@
+---
+import { insurances, practice } from '../../data/content';
+---
+<section id="insurance" class="section bg-sand text-ink">
+  <div class="wrap">
+    <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+      <h2 class="max-w-2xl text-4xl font-light md:text-6xl">Major accepted insurances</h2>
+      <p class="max-w-md text-lg text-ink/70">
+        We work with most major plans. Call <a href={practice.phoneHref} class="ulink font-normal text-ink">{practice.phone}</a> and we will check your coverage before your visit.
+      </p>
+    </div>
+
+    <ul class="mt-14 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+      {insurances.map((n, i) => (
+        <li data-reveal="scale" style={`--i:${i}`} class={`group relative flex h-36 items-center justify-center overflow-hidden rounded-3xl bg-white p-6 shadow-[0_1px_0_rgba(20,35,63,.06)] ring-1 ring-ink/5 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_-20px_rgba(20,35,63,.35)] hover:ring-gold ${i === insurances.length - 1 ? 'col-span-2 md:col-span-1' : ''}`}>
+          <span class="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gold transition-transform duration-700 ease-out group-hover:scale-x-100"></span>
+          <img
+            src={n.logo}
+            alt={n.name}
+            loading="lazy"
+            class={`${n.h} w-auto max-w-full opacity-75 grayscale transition-all duration-500 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0`}
+          />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
