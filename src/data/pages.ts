@@ -42,6 +42,22 @@ export type Detail = {
   sections: Section[];
   related?: string[];
   emergency?: string;
+  /* Local-search model: the city in the headline, the towns patients come from, and more sections. */
+  local?: {
+    city: string;            // shown in the headline, like "San Antonio, TX"
+    intro: string;           // replaces the hero intro, names the city and nearby areas
+    heading: string;         // heading of the local section
+    paragraphs: string[];
+    areas: string[];
+    areasNote: string;
+    image: string;           // photo for the local section
+  };
+  candidates?: { h: string; conditionsTitle: string; conditions: string[]; symptomsTitle: string; symptoms: string[]; note: string };
+  benefits?: { h: string; items: { t: string; d: string }[] };
+  recovery?: { h: string; steps: { t: string; d: string }[]; note: string };
+  safety?: { h: string; p: string };
+  faqs?: { q: string; a: string }[];
+  finalCta?: { title: string; text: string };
 };
 
 /* ---------------------------- SERVICES ---------------------------- */
@@ -53,14 +69,67 @@ export const serviceDetails: Detail[] = [
     intro:
       'If you have digestive symptoms that keep coming back, an endoscopy is one of the best tests there is. A thin tube with a tiny camera lets Dr. Narvaez see inside your digestive tract, find the problem and often treat it at the same time.',
     images: ['1581595220975-119360b1c63f', pool.scope, pool.surgeon],
+    local: {
+      city: 'San Antonio, TX',
+      intro:
+        'Dr. Robert M. Narvaez, MD, MBA, offers upper endoscopy, capsule endoscopy, endoscopy with banding and PEG tube placement at his Live Oak office. Patients are welcome from across San Antonio, Universal City, Schertz, Converse and the greater Bexar County area.',
+      heading: 'Endoscopy in San Antonio, TX',
+      paragraphs: [
+        'Dr. Narvaez is a gastroenterologist who sees patients at the Digestive & Liver Disease Center of San Antonio, at 12315 Judson Rd., Ste 318, in Live Oak. The office is a short drive from Universal City, Selma, Schertz, Windcrest, Converse and Kirby, and easy to reach from the rest of San Antonio.',
+        'Endoscopy is an outpatient procedure, and most people go home the same day. A consultation is the first step: you talk with Dr. Narvaez, he explains what he thinks is going on, and you decide on a plan together.',
+      ],
+      areas: ['San Antonio', 'Live Oak', 'Universal City', 'Schertz', 'Selma', 'Converse', 'Windcrest', 'Kirby', 'Cibolo', 'Alamo Heights'],
+      areasNote: 'Do not see your town? Many patients drive in from all over South Texas. Call us and we will help you plan your visit.',
+      image: pool.consult,
+    },
     sections: [
-      { h: 'Upper endoscopy', p: ['A thin, flexible tube with a tiny camera and light looks at your esophagus, stomach and the first part of your small intestine. It helps find the cause of problems like GERD or inflammation. Dr. Narvaez can take small tissue samples (biopsies) and remove polyps during the same exam.'] },
+      { h: 'What is an endoscopy?', p: ['An endoscopy uses a thin, flexible tube with a tiny camera and light to look inside your digestive tract. Dr. Narvaez can find the cause of your symptoms, take small tissue samples (biopsies), and treat some problems during the same exam, often without surgery.'] },
+      { h: 'Upper endoscopy', p: ['The camera looks at your esophagus, stomach and the first part of your small intestine. It helps find the cause of problems like GERD or inflammation. Dr. Narvaez can take biopsies and remove polyps during the same exam.'] },
       { h: 'Capsule endoscopy', p: ['You swallow a small capsule with a camera inside. It takes pictures for about eight hours as it moves through your digestive tract. The pictures help show inflammation, bleeding and other problems, including inflammatory bowel disease and colon cancer.'] },
       { h: 'Endoscopy with banding', p: ['If a vein in your esophagus is bleeding, a small band is placed around it to stop the bleeding. Some people need more than one session to keep the veins under control.'] },
       { h: 'Endoscopy with PEG placement', p: ['If you cannot eat or drink enough by mouth, Dr. Narvaez can place a soft feeding tube into your stomach with the help of an endoscope. It lets you get the nutrition you need.'] },
-      { h: 'What to expect', list: ['You get sedation, so you stay relaxed and comfortable.', 'Most exams are short, and you go home the same day.', 'You will get clear steps on how to prepare. See our Forms page for the prep sheets.', 'You need a ride home after sedation.'] },
     ],
-    related: ['gerd', 'inflammatory-bowel-disease', 'colon-cancer'],
+    candidates: {
+      h: 'Who needs an endoscopy?',
+      conditionsTitle: 'Conditions it helps find',
+      conditions: ['GERD and long-term acid reflux', 'Ulcers and inflamed stomach lining (gastritis)', 'Inflammatory bowel disease', 'Bleeding in the digestive tract', 'Polyps and other growths', 'Narrowing of the esophagus'],
+      symptomsTitle: 'Symptoms that may lead to one',
+      symptoms: ['Heartburn that does not go away with medicine', 'Trouble or pain when swallowing', 'Ongoing nausea or vomiting', 'Belly pain that keeps coming back', 'Black or bloody stools', 'Weight loss you cannot explain, or anemia'],
+      note: 'Dr. Narvaez decides after talking with you and reviewing your health history. Not everyone with these symptoms needs a scope.',
+    },
+    benefits: {
+      h: 'Why patients choose endoscopy',
+      items: [
+        { t: 'See the cause', d: 'A direct view of the lining gives answers that scans and blood tests cannot.' },
+        { t: 'Test and treat together', d: 'Biopsies, polyp removal and banding can often be done during the same exam.' },
+        { t: 'No large cuts', d: 'The camera goes in through the mouth, so there are no incisions for an upper endoscopy.' },
+        { t: 'Home the same day', d: 'With sedation you stay comfortable, and most people go home the same day.' },
+      ],
+    },
+    recovery: {
+      h: 'What recovery looks like',
+      steps: [
+        { t: 'Right after', d: 'You rest in the recovery area while the sedation wears off. A mild sore throat and some bloating are common.' },
+        { t: 'The first day', d: 'Someone must drive you home. Rest, and do not drive, work or make big decisions until the next day.' },
+        { t: 'The next day or two', d: 'Most people go back to normal eating and activities. Dr. Narvaez explains what he saw, and biopsy results take a few days.' },
+      ],
+      note: 'Call us if you have strong belly pain, fever, trouble swallowing, vomiting, or black or bloody stools after your exam.',
+    },
+    safety: {
+      h: 'Is endoscopy safe?',
+      p: 'Endoscopy is a common procedure and is considered safe. Like any procedure, it has small risks, such as a reaction to sedation, bleeding (more likely after a biopsy or polyp removal) and, rarely, a tear in the lining. Dr. Narvaez reviews your health, medicines and allergies beforehand and goes over the risks with you.',
+    },
+    faqs: [
+      { q: 'Does an endoscopy hurt?', a: 'You are given sedation, so most people feel little or nothing during the exam. A sore throat afterward is common and goes away in a day or two.' },
+      { q: 'How long does it take?', a: 'The exam itself is often short, about 15 to 30 minutes. Plan extra time for check-in and for waking up in the recovery area.' },
+      { q: 'Do I need someone to drive me home?', a: 'Yes. Sedation can make you drowsy, so you need a friend or family member to take you home. See our Forms page for your prep sheet.' },
+      { q: 'When will I get my results?', a: 'After the exam, Dr. Narvaez tells you what he saw. If biopsies were taken, the lab results take a few days.' },
+    ],
+    finalCta: {
+      title: 'Start with a conversation, not a procedure.',
+      text: 'Call the office or send us a message. We will answer your questions and help you decide what is next.',
+    },
+    related: ['gerd', 'acid-reflux', 'inflammatory-bowel-disease', 'colon-cancer', 'cirrhosis', 'hemorrhoids'],
   },
   {
     slug: 'acid-reflux',

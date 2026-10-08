@@ -1,7 +1,7 @@
 ---
 import PageHero from './PageHero.astro';
 import CtaBand from './CtaBand.astro';
-import { practice, services } from '../../data/content';
+import { practice } from '../../data/content';
 import { px, serviceDetails, conditionDetails, type Detail } from '../../data/pages';
 
 interface Props { d: Detail; kind: 'service' | 'condition' }
@@ -13,11 +13,26 @@ const related = (d.related ?? []).map((r) => {
   const x = list.find((s) => s.slug === r); return x && { ...x, href: `${base}${x.slug}/` };
 }).filter(Boolean) as (Detail & { href: string })[];
 const [img1, img2, img3] = d.images;
+const directions = 'https://www.google.com/maps/dir/?api=1&destination=12315+Judson+Rd+Ste+318+Live+Oak+TX+78233';
+
+const title = d.local ? `${d.name} in ${d.local.city}` : d.name;
+const eyebrow = d.local
+  ? `Care services · ${d.local.city}`
+  : kind === 'service' ? 'Our services' : 'Conditions we treat';
+const intro = d.local?.intro ?? d.intro;
+
+const faqSchema = d.faqs
+  ? JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: d.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    })
+  : null;
 ---
 <PageHero
-  title={d.name}
-  intro={d.intro}
-  eyebrow={kind === 'service' ? 'Our services' : 'Conditions we treat'}
+  title={title}
+  intro={intro}
+  eyebrow={eyebrow}
   crumbs={[{ label: kind === 'service' ? 'Services' : 'Conditions', href: base }, { label: d.name }]}
   image={px(img1, 900)}
   imageAlt={`${d.name}: a photo that goes with this topic`}
@@ -63,6 +78,32 @@ const [img1, img2, img3] = d.images;
             )}
           </section>
         ))}
+
+        {d.candidates && (
+          <section>
+            <h2 class="text-3xl font-light md:text-4xl">{d.candidates.h}</h2>
+            <span class="mt-4 block h-px w-14 bg-gold"></span>
+            <div class="mt-6 grid gap-5 sm:grid-cols-2">
+              <div class="rounded-3xl bg-white p-6 ring-1 ring-ink/5">
+                <h3 class="font-heading text-xl">{d.candidates.conditionsTitle}</h3>
+                <ul class="mt-4 space-y-2.5">
+                  {d.candidates.conditions.map((c) => (
+                    <li class="flex gap-3 text-ink/80"><span aria-hidden="true" class="mt-[.6rem] h-1.5 w-1.5 shrink-0 rounded-full bg-gold"></span><span>{c}</span></li>
+                  ))}
+                </ul>
+              </div>
+              <div class="rounded-3xl bg-white p-6 ring-1 ring-ink/5">
+                <h3 class="font-heading text-xl">{d.candidates.symptomsTitle}</h3>
+                <ul class="mt-4 space-y-2.5">
+                  {d.candidates.symptoms.map((c) => (
+                    <li class="flex gap-3 text-ink/80"><span aria-hidden="true" class="mt-[.6rem] h-1.5 w-1.5 shrink-0 rounded-full bg-gold"></span><span>{c}</span></li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <p class="mt-5 text-ink/65">{d.candidates.note}</p>
+          </section>
+        )}
       </div>
       <p class="mt-14 text-sm text-ink/55">This page is general information. It is not medical advice. Dr. Narvaez will explain what is right for you.</p>
     </div>
@@ -84,26 +125,131 @@ const [img1, img2, img3] = d.images;
   </div>
 </section>
 
-<section class="relative isolate overflow-hidden bg-abyss">
-  <img src={px(img3, 1800)} alt="" loading="lazy" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-50" />
-  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-abyss via-abyss/80 to-abyss/30"></div>
-  <div class="wrap py-24 lg:py-32" data-reveal>
-    <p class="max-w-2xl text-balance font-heading text-3xl font-light leading-snug md:text-5xl">You will never be rushed. Your questions always get a clear answer.</p>
-    <a href="/contact/" class="btn-shiny mt-9"><span>Meet Dr. Narvaez</span></a>
-  </div>
-</section>
+{d.local ? (
+  <section class="relative isolate overflow-hidden bg-midnight py-24 lg:py-32" aria-labelledby="local-heading">
+    <div class="wrap grid items-center gap-14 lg:grid-cols-12">
+      <div class="lg:col-span-7" data-reveal="left">
+        <p class="font-heading text-sm uppercase tracking-[.2em] text-gold">Close to home</p>
+        <h2 id="local-heading" class="mt-4 text-balance text-4xl font-light md:text-6xl">{d.local.heading}</h2>
+        <div class="mt-8 space-y-5 text-lg leading-relaxed text-ivory/80">
+          {d.local.paragraphs.map((t) => <p>{t}</p>)}
+        </div>
+
+        <h3 class="mt-12 font-heading text-xl text-gold-soft">Patients come to us from</h3>
+        <ul class="mt-5 flex flex-wrap gap-3">
+          {d.local.areas.map((a) => (
+            <li class="rounded-full border border-gold/35 bg-white/[.03] px-5 py-2.5 text-ivory/90 transition-all duration-500 hover:-translate-y-0.5 hover:border-gold hover:bg-white/[.07]">{a}</li>
+          ))}
+        </ul>
+        <p class="mt-6 max-w-xl text-ivory/65">{d.local.areasNote}</p>
+
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a href={directions} target="_blank" rel="noopener" class="btn btn-line">Get directions <span class="sr-only">(opens in a new tab)</span></a>
+          <a href={practice.phoneHref} class="btn btn-line">Call {practice.phone}</a>
+        </div>
+      </div>
+
+      <div class="space-y-5 lg:col-span-5" data-reveal="right">
+        <div class="group overflow-hidden rounded-3xl">
+          <img src={px(d.local.image, 1000)} alt="A doctor talking with a patient at his desk" loading="lazy" class="aspect-[4/3] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
+        </div>
+        <address class="rounded-3xl border border-gold/25 bg-white/[.03] p-7 not-italic">
+          <p class="font-heading text-sm text-gold">Our office</p>
+          <p class="mt-3 text-xl text-ivory/90">{practice.address[0]}<br />{practice.address[1]}</p>
+          <p class="mt-3 text-sm text-ivory/60">Mon to Thu, 8 am to 5 pm · Fri, 8 am to 12:30 pm</p>
+        </address>
+      </div>
+    </div>
+  </section>
+) : (
+  <section class="relative isolate overflow-hidden bg-abyss">
+    <img src={px(img3, 1800)} alt="" loading="lazy" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-50" />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-abyss via-abyss/80 to-abyss/30"></div>
+    <div class="wrap py-24 lg:py-32" data-reveal>
+      <p class="max-w-2xl text-balance font-heading text-3xl font-light leading-snug md:text-5xl">You will never be rushed. Your questions always get a clear answer.</p>
+      <a href="/contact/" class="btn-shiny mt-9"><span>Meet Dr. Narvaez</span></a>
+    </div>
+  </section>
+)}
+
+{d.benefits && (
+  <section class="section bg-sand text-ink">
+    <div class="wrap">
+      <h2 class="max-w-2xl text-4xl font-light md:text-6xl" data-reveal>{d.benefits.h}</h2>
+      <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {d.benefits.items.map((b, i) => (
+          <li class="rounded-3xl bg-white p-8 ring-1 ring-ink/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_50px_-20px_rgba(20,35,63,.35)] hover:ring-gold" data-reveal style={`--i:${i}`}>
+            <span class="font-heading text-sm text-[#a67a4f]">0{i + 1}</span>
+            <h3 class="mt-4 text-2xl">{b.t}</h3>
+            <p class="mt-3 text-ink/70">{b.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+{d.recovery && (
+  <section class="section bg-abyss">
+    <div class="wrap">
+      <h2 class="max-w-2xl text-4xl font-light md:text-6xl" data-reveal>{d.recovery.h}</h2>
+      <ol class="mt-14 grid gap-6 md:grid-cols-3">
+        {d.recovery.steps.map((s, i) => (
+          <li class="relative rounded-3xl border border-gold/25 bg-white/[.03] p-8" data-reveal style={`--i:${i}`}>
+            <span class="grid h-12 w-12 place-items-center rounded-full border border-gold font-heading text-xl text-gold">{i + 1}</span>
+            <h3 class="mt-6 text-2xl">{s.t}</h3>
+            <p class="mt-3 text-ivory/70">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-10 max-w-3xl text-ivory/65" data-reveal>{d.recovery.note}</p>
+    </div>
+  </section>
+)}
+
+{(d.safety || d.faqs) && (
+  <section class="section bg-ivory text-ink">
+    <div class="wrap grid gap-16 lg:grid-cols-12">
+      {d.safety && (
+        <div class="lg:col-span-5" data-reveal="left">
+          <h2 class="text-4xl font-light md:text-5xl">{d.safety.h}</h2>
+          <span class="mt-5 block h-px w-14 bg-gold"></span>
+          <p class="mt-6 text-lg leading-relaxed text-ink/80">{d.safety.p}</p>
+        </div>
+      )}
+      {d.faqs && (
+        <div class={d.safety ? 'lg:col-span-7' : 'lg:col-span-12'} data-reveal="right">
+          <h2 class="text-4xl font-light md:text-5xl">Questions we hear a lot</h2>
+          <div class="mt-8 divide-y divide-ink/10 border-y border-ink/10">
+            {d.faqs.map((f) => (
+              <details class="group py-5">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-heading text-xl marker:hidden [&::-webkit-details-marker]:hidden">
+                  <span>{f.q}</span>
+                  <span aria-hidden="true" class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold text-[#a67a4f] transition-transform duration-500 group-open:rotate-45">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                  </span>
+                </summary>
+                <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink/75">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+)}
 
 {related.length > 0 && (
   <section class="section bg-sand text-ink">
     <div class="wrap">
-      <h2 class="text-3xl font-light md:text-5xl" data-reveal>Related care</h2>
-      <ul class="mt-10 grid gap-5 md:grid-cols-3">
+      <h2 class="text-3xl font-light md:text-5xl" data-reveal>{d.local ? 'Other services' : 'Related care'}</h2>
+      <ul class={`mt-10 grid gap-5 md:grid-cols-2 ${related.length > 3 ? 'lg:grid-cols-3' : 'md:grid-cols-3'}`}>
         {related.map((r, i) => (
-          <li data-reveal style={`--i:${i}`}>
+          <li data-reveal style={`--i:${i % 3}`}>
             <a href={r.href} class="group block h-full rounded-3xl bg-white p-7 ring-1 ring-ink/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_50px_-20px_rgba(20,35,63,.35)] hover:ring-gold">
               <p class="font-heading text-2xl">{r.name}</p>
               <p class="mt-3 text-ink/70">{r.tagline}</p>
-              <span class="ulink mt-6 inline-block font-heading">Read more</span>
+              <span class="ulink mt-6 inline-block font-heading">Learn more</span>
             </a>
           </li>
         ))}
@@ -112,4 +258,6 @@ const [img1, img2, img3] = d.images;
   </section>
 )}
 
-<CtaBand />
+<CtaBand title={d.finalCta?.title} text={d.finalCta?.text} />
+
+{faqSchema && <script type="application/ld+json" set:html={faqSchema}></script>}
