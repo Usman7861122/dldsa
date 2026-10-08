@@ -2,9 +2,10 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import DetailPage from '../../components/ui/DetailPage.astro';
 import { serviceDetails } from '../../data/pages';
+import { localExtras } from '../../data/local';
 
 export function getStaticPaths() {
-  return serviceDetails.map((d) => ({ params: { slug: d.slug }, props: { d } }));
+  return serviceDetails.map((d) => ({ params: { slug: d.slug }, props: { d: { ...d, ...(d.local ? {} : localExtras['service:' + d.slug]) } } }));
 }
 const { d } = Astro.props;
 ---
