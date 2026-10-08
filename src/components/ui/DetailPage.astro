@@ -17,9 +17,12 @@ const directions = 'https://www.google.com/maps/dir/?api=1&destination=12315+Jud
 
 const title = d.local ? `${d.name} in ${d.local.city}` : d.name;
 const eyebrow = d.local
-  ? `Care services · ${d.local.city}`
+  ? 'Care services ·'
   : kind === 'service' ? 'Our services' : 'Conditions we treat';
-const intro = d.local?.intro ?? d.intro;
+const fullIntro = d.local?.intro ?? d.intro;
+const cut = d.local ? fullIntro.search(/(?<!\b[A-Z][a-z]?)\.\s+(?=[A-Z])/) : -1;
+const intro = cut > 0 ? fullIntro.slice(0, cut + 1) : fullIntro;
+const intro2 = cut > 0 ? fullIntro.slice(cut + 1).trim() : undefined;
 
 const faqSchema = d.faqs
   ? JSON.stringify({
@@ -32,6 +35,8 @@ const faqSchema = d.faqs
 <PageHero
   title={title}
   intro={intro}
+  intro2={intro2}
+  pill={d.local?.city}
   eyebrow={eyebrow}
   crumbs={[{ label: kind === 'service' ? 'Services' : 'Conditions', href: base }, { label: d.name }]}
   image={px(img1, 900)}

@@ -1,7 +1,7 @@
 ---
 interface Crumb { label: string; href?: string }
-interface Props { title: string; intro?: string; crumbs?: Crumb[]; image?: string; imageAlt?: string; eyebrow?: string }
-const { title, intro, crumbs = [], image, imageAlt = '', eyebrow } = Astro.props;
+interface Props { title: string; intro?: string; crumbs?: Crumb[]; image?: string; imageAlt?: string; eyebrow?: string; intro2?: string; pill?: string }
+const { title, intro, crumbs = [], image, imageAlt = '', eyebrow, intro2, pill } = Astro.props;
 ---
 <section class="relative isolate overflow-hidden bg-abyss pb-16 pt-36 lg:pb-24 lg:pt-44">
   <div class="pointer-events-none absolute -right-40 -top-40 -z-10 h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle,rgba(215,172,131,0.14),transparent_65%)]"></div>
@@ -20,10 +20,16 @@ const { title, intro, crumbs = [], image, imageAlt = '', eyebrow } = Astro.props
             ))}
           </ol>
         </nav>
-        {eyebrow && <p class="mt-8 font-heading text-sm uppercase tracking-[.2em] text-gold">{eyebrow}</p>}
+        {eyebrow && (
+          <p class="mt-8 flex flex-wrap items-center gap-3 font-heading text-sm uppercase tracking-[.2em] text-gold">
+            <span>{eyebrow}</span>
+            {pill && <span class="rounded-full border border-gold/40 px-4 py-1.5 normal-case tracking-normal text-ivory">{pill}</span>}
+          </p>
+        )}
         <h1 class={`${eyebrow ? 'mt-4' : 'mt-8'} text-balance text-5xl font-light leading-[1.05] md:text-7xl`}>{title}</h1>
-        {intro && <span aria-hidden="true" class="mt-7 block h-px w-20 bg-gold/70"></span>}
-        {intro && <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ivory/75 md:text-xl">{intro}</p>}
+        {intro && <p class="mt-7 max-w-2xl text-lg leading-relaxed text-ivory/75 md:text-xl">{intro}</p>}
+        {intro2 && <hr class="mt-6 max-w-2xl border-0 border-t border-ivory/15" />}
+        {intro2 && <p class="mt-6 max-w-2xl text-base leading-relaxed text-ivory/65">{intro2}</p>}
         <div class="mt-9 flex flex-wrap gap-4"><slot /></div>
       </div>
       {image && (
