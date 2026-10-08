@@ -22,7 +22,8 @@ const { title, intro, crumbs = [], image, imageAlt = '', eyebrow } = Astro.props
         </nav>
         {eyebrow && <p class="mt-8 font-heading text-sm uppercase tracking-[.2em] text-gold">{eyebrow}</p>}
         <h1 class={`${eyebrow ? 'mt-4' : 'mt-8'} text-balance text-5xl font-light leading-[1.05] md:text-7xl`}>{title}</h1>
-        {intro && <p class="mt-7 max-w-2xl text-lg leading-relaxed text-ivory/75 md:text-xl">{intro}</p>}
+        {intro && <span aria-hidden="true" class="mt-7 block h-px w-20 bg-gold/70"></span>}
+        {intro && <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ivory/75 md:text-xl">{intro}</p>}
         <div class="mt-9 flex flex-wrap gap-4"><slot /></div>
       </div>
       {image && (
