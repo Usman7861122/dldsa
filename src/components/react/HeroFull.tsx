@@ -40,7 +40,7 @@ export default function HeroFull({ image, alt }: Props) {
     <div ref={box} onPointerMove={onMove} className="absolute inset-0">
       {/* Photo: sits on the right and fades into the navy on the left, so the words stay clear */}
       <motion.div
-        className="hero-photo absolute right-0 top-0 h-[66%] w-full lg:bottom-0 lg:top-auto lg:h-[90%] lg:w-[68%]"
+        className="hero-photo absolute right-0 top-0 h-[66%] w-full lg:inset-y-0 lg:left-[17%] lg:h-full lg:w-[83%]"
         style={reduce ? undefined : { x: imgX, y: imgY }}
       >
         <motion.img
@@ -49,14 +49,15 @@ export default function HeroFull({ image, alt }: Props) {
           width={2000}
           height={1287}
           loading="eager"
-          className="h-full w-full object-cover object-[42%_30%] lg:object-[45%_40%]"
+          className="h-full w-full object-cover object-[42%_30%] lg:object-[30%_40%]"
           initial={{ scale: reduce ? 1.04 : 1.14 }}
           animate={{ scale: 1.04 }}
           transition={reduce ? { duration: 0 } : { duration: 2.8, ease }}
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-abyss/80 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-abyss/70 via-transparent to-transparent" />
+      <div className="absolute inset-0 hidden bg-gradient-to-r from-abyss/75 via-abyss/35 via-[38%] to-transparent to-[62%] lg:block" />
 
       {/* Text layer */}
       <motion.div
@@ -73,7 +74,7 @@ export default function HeroFull({ image, alt }: Props) {
         </motion.p>
 
         <div className="hero-follow relative mt-6 max-w-4xl" onPointerMove={onLitMove}>
-          <h1 className="text-balance font-heading text-[clamp(2.6rem,5.2vw,4.9rem)] font-light leading-[1.02] text-ivory">
+          <h1 className="text-balance font-heading text-[clamp(2.6rem,4.4vw,4.2rem)] font-light leading-[1.02] text-ivory [text-shadow:0_2px_24px_rgba(5,15,30,.45)]">
             {lines.map((l, i) => (
               <span key={l} className="block overflow-hidden pb-[.1em]">
                 <motion.span
@@ -88,7 +89,7 @@ export default function HeroFull({ image, alt }: Props) {
             ))}
           </h1>
           {/* Same words again, lit in aqua where the pointer is */}
-          <div aria-hidden="true" className="hero-follow-lit pointer-events-none absolute inset-0 select-none font-heading tracking-[-0.02em] text-[clamp(2.6rem,5.2vw,4.9rem)] font-light leading-[1.02]">
+          <div aria-hidden="true" className="hero-follow-lit pointer-events-none absolute inset-0 select-none font-heading tracking-[-0.02em] text-[clamp(2.6rem,4.4vw,4.2rem)] font-light leading-[1.02]">
             {lines.map((l) => (
               <span key={l} className="block pb-[.1em]">{l}</span>
             ))}
@@ -96,7 +97,7 @@ export default function HeroFull({ image, alt }: Props) {
         </div>
 
         <motion.p
-          className="mt-8 hidden max-w-md text-lg text-ivory/80 sm:block"
+          className="mt-8 hidden max-w-sm text-lg text-ivory/80 sm:block"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={t(1.1)}
