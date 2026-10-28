@@ -207,11 +207,40 @@ body { overflow-x: clip; }
 .glow-host::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(260px circle at var(--mx) var(--my), rgba(246, 241, 233, .06), transparent 70%),
-    radial-gradient(640px circle at var(--mx) var(--my), rgba(215, 172, 131, .15), transparent 65%);
+    radial-gradient(260px circle at var(--mx) var(--my), color-mix(in srgb, var(--color-ivory) 6%, transparent), transparent 70%),
+    radial-gradient(640px circle at var(--mx) var(--my), color-mix(in srgb, var(--color-gold) 15%, transparent), transparent 65%);
   opacity: var(--glow);
   transition: opacity .7s ease;
 }
 @media (hover: none), (prefers-reduced-motion: reduce) {
   .glow-host::before { display: none; }
 }
+
+/* ---------- Home 2 colour scheme: deep navy with a fresh aqua accent ---------- */
+html.theme-sky {
+  --color-abyss: #0b2140;
+  --color-midnight: #0e2747;
+  --color-navy: #17365f;
+  --color-gold: #5fc9c2;
+  --color-gold-soft: #9be0da;
+  --color-ivory: #f3f8f9;
+  --color-sand: #e2eef1;
+  --color-ink: #0e2747;
+  --color-mist: #9db4c8;
+}
+html.theme-sky ::selection { color: #0b2140; }
+html.theme-sky .text-\[\#a67a4f\] { color: #17796f; }
+html.theme-sky .btn-gold, html.theme-sky .btn-gold:hover { color: #0b2140; }
+
+/* ---------- Home 2 hero: full photo with a text layer that follows the pointer ---------- */
+.hero-follow {
+  --fx: 50%; --fy: 50%;
+}
+.hero-follow-lit {
+  color: var(--color-gold-soft);
+  -webkit-mask-image: radial-gradient(180px circle at var(--fx) var(--fy), #000 0%, transparent 100%);
+          mask-image: radial-gradient(180px circle at var(--fx) var(--fy), #000 0%, transparent 100%);
+  opacity: 0; transition: opacity .5s ease;
+}
+.hero-follow:hover .hero-follow-lit { opacity: 1; }
+@media (hover: none), (prefers-reduced-motion: reduce) { .hero-follow-lit { display: none; } }

@@ -1,0 +1,27 @@
+---
+import HeroFull from '../react/HeroFull.tsx';
+import { practice } from '../../data/content';
+const photo = 'https://images.unsplash.com/photo-1759678595341-fb3d4412c55b?w=2000&q=75&auto=format&fit=crop';
+---
+<section class="relative isolate min-h-[100svh] overflow-hidden bg-abyss" aria-label="Welcome">
+  <HeroFull client:load image={photo} alt="A happy family having a picnic together in a sunny park" />
+
+  <div class="absolute inset-x-0 bottom-0 z-10">
+    <div class="wrap pb-8 lg:pb-10">
+      <dl class="grid gap-6 border-t border-ivory/20 pt-7 sm:grid-cols-3">
+        <div>
+          <dt class="font-heading text-sm text-gold">Visit us</dt>
+          <dd class="mt-1 text-sm text-ivory/85 lg:text-base">{practice.address[0]}<br />{practice.address[1]}</dd>
+        </div>
+        <div class="hidden sm:block">
+          <dt class="font-heading text-sm text-gold">Open</dt>
+          <dd class="mt-1 text-sm text-ivory/85 lg:text-base">Mon to Thu, 8 am to 5 pm<br />Fri, 8 am to 12:30 pm</dd>
+        </div>
+        <div class="hidden sm:block">
+          <dt class="font-heading text-sm text-gold">Call</dt>
+          <dd class="mt-1"><a href={practice.phoneHref} class="ulink text-ivory/95">{practice.phone}</a></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>

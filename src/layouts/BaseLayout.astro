@@ -3,19 +3,22 @@ import '../styles/global.css';
 import MobileBar from '../components/ui/MobileBar.astro';
 import CookieConsent from '../components/react/CookieConsent.tsx';
 
-interface Props { title?: string; description?: string }
+interface Props { title?: string; description?: string; theme?: 'default' | 'sky'; noindex?: boolean }
 const {
   title = 'Digestive & Liver Disease Center of San Antonio | Gastroenterologist in Live Oak, TX',
   description = 'Dr. Robert M. Narvaez treats stomach, colon and liver conditions in San Antonio. Call (210) 650-9119.',
+  theme = 'default',
+  noindex = false,
 } = Astro.props;
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" class={theme === 'sky' ? 'theme-sky' : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#07111f" />
+    <meta name="theme-color" content={theme === 'sky' ? '#0e2747' : '#07111f'} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
