@@ -251,7 +251,7 @@ html.theme-sky .btn-gold, html.theme-sky .btn-gold:hover { color: #0b2140; }
 }
 @media (min-width: 1024px) {
   .hero-photo {
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 14%);
-            mask-image: linear-gradient(to right, transparent 0%, #000 14%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%);
+            mask-image: linear-gradient(to right, transparent 0%, #000 10%);
   }
 }

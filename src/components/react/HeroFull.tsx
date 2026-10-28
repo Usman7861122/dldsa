@@ -38,9 +38,12 @@ export default function HeroFull({ image, alt }: Props) {
 
   return (
     <div ref={box} onPointerMove={onMove} className="absolute inset-0">
-      {/* Photo: sits on the right and fades into the navy on the left, so the words stay clear */}
+      {/* Soft blurred copy of the photo fills the whole hero, so there is never a flat colour band */}
+      <img src={image} alt="" aria-hidden="true" className="absolute inset-0 hidden h-full w-full scale-110 object-cover opacity-90 blur-2xl lg:block" />
+
+      {/* The sharp photo sits on the right and melts into the blurred copy on its left edge */}
       <motion.div
-        className="hero-photo absolute right-0 top-0 h-[66%] w-full lg:inset-y-0 lg:left-[17%] lg:h-full lg:w-[83%]"
+        className="hero-photo absolute right-0 top-0 h-[66%] w-full lg:inset-y-0 lg:left-auto lg:h-full lg:w-auto lg:aspect-[2000/1287]"
         style={reduce ? undefined : { x: imgX, y: imgY }}
       >
         <motion.img
@@ -49,15 +52,16 @@ export default function HeroFull({ image, alt }: Props) {
           width={2000}
           height={1287}
           loading="eager"
-          className="h-full w-full object-cover object-[42%_30%] lg:object-[30%_40%]"
+          className="h-full w-full object-cover object-[42%_30%] lg:object-center"
           initial={{ scale: reduce ? 1.04 : 1.14 }}
           animate={{ scale: 1.04 }}
           transition={reduce ? { duration: 0 } : { duration: 2.8, ease }}
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-abyss/70 via-transparent to-transparent" />
-      <div className="absolute inset-0 hidden bg-gradient-to-r from-abyss/75 via-abyss/35 via-[38%] to-transparent to-[62%] lg:block" />
+      {/* Light neutral shade only behind the words, not a blue wash */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+      <div className="absolute inset-0 hidden bg-gradient-to-r from-black/60 via-black/30 via-[32%] to-transparent to-[62%] lg:block" />
 
       {/* Text layer */}
       <motion.div
@@ -97,7 +101,7 @@ export default function HeroFull({ image, alt }: Props) {
         </div>
 
         <motion.p
-          className="mt-8 hidden max-w-sm text-lg text-ivory/80 sm:block"
+          className="mt-8 hidden max-w-sm text-lg text-ivory/90 [text-shadow:0_1px_14px_rgba(0,0,0,.5)] sm:block"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={t(1.1)}
