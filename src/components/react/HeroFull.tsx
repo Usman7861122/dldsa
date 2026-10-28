@@ -64,7 +64,7 @@ export default function HeroFull({ image, alt }: Props) {
         style={reduce ? undefined : { x: txtX, y: txtY }}
       >
         <motion.p
-          className="hidden font-heading text-sm uppercase tracking-[.22em] text-gold sm:block"
+          className="hidden font-heading text-sm uppercase tracking-[.22em] text-gold lg:block"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={t(0.3)}
