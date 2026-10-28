@@ -38,85 +38,60 @@ export default function HeroFull({ image, alt }: Props) {
 
   return (
     <div ref={box} onPointerMove={onMove} className="absolute inset-0">
-      {/* Soft blurred copy of the photo fills the whole hero, so there is never a flat colour band */}
-      <img src={image} alt="" aria-hidden="true" className="absolute inset-0 hidden h-full w-full scale-110 object-cover opacity-90 blur-2xl lg:block" />
-
-      {/* The sharp photo sits on the right and melts into the blurred copy on its left edge */}
-      <motion.div
-        className="hero-photo absolute right-0 top-0 h-[66%] w-full lg:inset-y-0 lg:left-auto lg:h-full lg:w-auto lg:aspect-[2000/1287]"
-        style={reduce ? undefined : { x: imgX, y: imgY }}
-      >
+      {/* One full photo, edge to edge. Nothing is added on the left. */}
+      <motion.div className="absolute -inset-4" style={reduce ? undefined : { x: imgX, y: imgY }}>
         <motion.img
           src={image}
           alt={alt}
           width={2000}
           height={1287}
           loading="eager"
-          className="h-full w-full object-cover object-[42%_30%] lg:object-center"
-          initial={{ scale: reduce ? 1.04 : 1.14 }}
-          animate={{ scale: 1.04 }}
+          className="h-full w-full object-cover object-[50%_40%]"
+          initial={{ scale: reduce ? 1.02 : 1.1 }}
+          animate={{ scale: 1.02 }}
           transition={reduce ? { duration: 0 } : { duration: 2.8, ease }}
         />
       </motion.div>
 
-      {/* Light neutral shade only behind the words, not a blue wash */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-      <div className="absolute inset-0 hidden bg-gradient-to-r from-black/60 via-black/30 via-[32%] to-transparent to-[62%] lg:block" />
-
-      {/* Text layer */}
+      {/* Text layer: a small frosted card low in the frame, so the photo stays clean */}
       <motion.div
-        className="wrap relative flex h-full flex-col justify-end pb-32 pt-28 lg:justify-center lg:pb-48"
+        className="wrap relative flex h-full flex-col justify-end pb-40 pt-28 lg:pb-36"
         style={reduce ? undefined : { x: txtX, y: txtY }}
       >
-        <motion.p
-          className="hidden font-heading text-sm uppercase tracking-[.22em] text-gold lg:block"
-          initial={{ opacity: 0, y: 12 }}
+        <motion.div
+          className="max-w-xl rounded-3xl border border-white/15 bg-abyss/50 p-6 backdrop-blur-md sm:p-8"
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={t(0.3)}
         >
-          Gastroenterology · San Antonio, TX
-        </motion.p>
+          <p className="hidden font-heading text-xs uppercase tracking-[.22em] text-gold lg:block">Gastroenterology · San Antonio, TX</p>
 
-        <div className="hero-follow relative mt-6 max-w-4xl" onPointerMove={onLitMove}>
-          <h1 className="text-balance font-heading text-[clamp(2.6rem,4.4vw,4.2rem)] font-light leading-[1.02] text-ivory [text-shadow:0_2px_24px_rgba(5,15,30,.45)]">
-            {lines.map((l, i) => (
-              <span key={l} className="block overflow-hidden pb-[.1em]">
-                <motion.span
-                  className="block"
-                  initial={{ y: '110%' }}
-                  animate={{ y: 0 }}
-                  transition={t(0.5 + i * 0.14)}
-                >
-                  {l}
-                </motion.span>
-              </span>
-            ))}
-          </h1>
-          {/* Same words again, lit in aqua where the pointer is */}
-          <div aria-hidden="true" className="hero-follow-lit pointer-events-none absolute inset-0 select-none font-heading tracking-[-0.02em] text-[clamp(2.6rem,4.4vw,4.2rem)] font-light leading-[1.02]">
-            {lines.map((l) => (
-              <span key={l} className="block pb-[.1em]">{l}</span>
-            ))}
+          <div className="hero-follow relative lg:mt-4" onPointerMove={onLitMove}>
+            <h1 className="text-balance font-heading text-[clamp(2rem,3.2vw,3rem)] font-light leading-[1.05] text-ivory">
+              {lines.map((l, i) => (
+                <span key={l} className="block overflow-hidden pb-[.1em]">
+                  <motion.span className="block" initial={{ y: '110%' }} animate={{ y: 0 }} transition={t(0.5 + i * 0.14)}>
+                    {l}
+                  </motion.span>
+                </span>
+              ))}
+            </h1>
+            {/* Same words again, lit in aqua where the pointer is */}
+            <div aria-hidden="true" className="hero-follow-lit pointer-events-none absolute inset-0 select-none font-heading tracking-[-0.02em] text-[clamp(2rem,3.2vw,3rem)] font-light leading-[1.05]">
+              {lines.map((l) => (
+                <span key={l} className="block pb-[.1em]">{l}</span>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <motion.p
-          className="mt-8 hidden max-w-sm text-lg text-ivory/90 [text-shadow:0_1px_14px_rgba(0,0,0,.5)] sm:block"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={t(1.1)}
-        >
-          Dr. Robert M. Narvaez treats stomach, colon and liver conditions. Patients tell us he listens and never rushes.
-        </motion.p>
+          <p className="mt-4 hidden text-base text-ivory/85 sm:block">
+            Dr. Robert M. Narvaez treats stomach, colon and liver conditions. Patients tell us he listens and never rushes.
+          </p>
 
-        <motion.div
-          className="mt-9 flex flex-wrap gap-4"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={t(1.3)}
-        >
-          <a href="/contact/" className="btn-shiny"><span>Book an appointment</span></a>
-          <a href="/services/" className="btn btn-line">See our services</a>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href="/contact/" className="btn-shiny"><span>Book an appointment</span></a>
+            <a href="/services/" className="btn btn-line">See our services</a>
+          </div>
         </motion.div>
       </motion.div>
     </div>
