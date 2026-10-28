@@ -232,6 +232,15 @@ html.theme-sky ::selection { color: #0a1a2f; }
 html.theme-sky .text-\[\#a67a4f\] { color: #b04507; }
 html.theme-sky .btn-gold, html.theme-sky .btn-gold:hover { color: #0a1a2f; }
 
+/* Outline buttons are filled orange from the start on Home 2 (a white fill sweeps in on hover) */
+html.theme-sky .btn-line { background: var(--color-gold); color: #0a1a2f; border-color: var(--color-gold); }
+html.theme-sky .btn-line::before { background: var(--color-ivory); }
+html.theme-sky .btn-line:hover { color: #0a1a2f; border-color: var(--color-ivory); }
+/* ...except the quiet "Reject optional" button in the cookie card */
+html.theme-sky [role="dialog"] .btn-line { background: transparent; color: var(--color-gold-soft); border-color: color-mix(in srgb, var(--color-gold) 60%, transparent); }
+html.theme-sky [role="dialog"] .btn-line::before { background: var(--color-gold); }
+html.theme-sky [role="dialog"] .btn-line:hover { color: #0a1a2f; border-color: var(--color-gold); }
+
 /* ---------- Home 2 hero: full photo with a text layer that follows the pointer ---------- */
 .hero-follow {
   --fx: 50%; --fy: 50%;
