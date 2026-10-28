@@ -55,7 +55,7 @@ export default function HeroFull({ image, alt }: Props) {
 
       {/* Text layer: a small frosted card low in the frame, so the photo stays clean */}
       <motion.div
-        className="wrap relative flex h-full flex-col justify-end pb-40 pt-28 lg:pb-36"
+        className="wrap relative flex h-full flex-col justify-end pb-24 pt-28 lg:pb-14"
         style={reduce ? undefined : { x: txtX, y: txtY }}
       >
         <motion.div

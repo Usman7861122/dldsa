@@ -5,23 +5,23 @@ const photo = '/images/family-park.jpg';
 ---
 <section class="relative isolate overflow-hidden bg-abyss" style="min-height:100vh;min-height:100svh" aria-label="Welcome">
   <HeroFull client:load image={photo} alt="A smiling mother, father and two daughters hugging on a picnic blanket in a sunny park" />
+</section>
 
-  <div class="absolute inset-x-0 bottom-0 z-10">
-    <div class="wrap pb-6 lg:pb-8">
-      <dl class="grid gap-6 rounded-2xl border border-white/10 bg-abyss/25 px-6 py-4 backdrop-blur-[6px] [text-shadow:0_1px_12px_rgba(0,0,0,.35)] sm:grid-cols-3">
-        <div>
-          <dt class="font-heading text-sm text-gold-soft">Visit us</dt>
-          <dd class="mt-1 text-sm text-ivory/85 lg:text-base">{practice.address[0]}<br />{practice.address[1]}</dd>
-        </div>
-        <div class="hidden sm:block">
-          <dt class="font-heading text-sm text-gold-soft">Open</dt>
-          <dd class="mt-1 text-sm text-ivory/85 lg:text-base">Mon to Thu, 8 am to 5 pm<br />Fri, 8 am to 12:30 pm</dd>
-        </div>
-        <div class="hidden sm:block">
-          <dt class="font-heading text-sm text-gold-soft">Call</dt>
-          <dd class="mt-1"><a href={practice.phoneHref} class="ulink text-ivory/95">{practice.phone}</a></dd>
-        </div>
-      </dl>
-    </div>
+<section class="border-b border-gold/15 bg-midnight" aria-label="Visit and hours">
+  <div class="wrap">
+    <dl class="grid gap-6 py-8 sm:grid-cols-3">
+      <div>
+        <dt class="font-heading text-sm text-gold">Visit us</dt>
+        <dd class="mt-1 text-ivory/85">{practice.address[0]}<br />{practice.address[1]}</dd>
+      </div>
+      <div>
+        <dt class="font-heading text-sm text-gold">Open</dt>
+        <dd class="mt-1 text-ivory/85">Mon to Thu, 8 am to 5 pm<br />Fri, 8 am to 12:30 pm</dd>
+      </div>
+      <div>
+        <dt class="font-heading text-sm text-gold">Call</dt>
+        <dd class="mt-1"><a href={practice.phoneHref} class="ulink text-ivory/95">{practice.phone}</a></dd>
+      </div>
+    </dl>
   </div>
 </section>
