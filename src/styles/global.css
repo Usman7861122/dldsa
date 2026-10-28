@@ -216,21 +216,21 @@ body { overflow-x: clip; }
   .glow-host::before { display: none; }
 }
 
-/* ---------- Home 2 colour scheme: deep navy with a fresh aqua accent ---------- */
+/* ---------- Home 2 colour scheme: white, orange and navy blue ---------- */
 html.theme-sky {
-  --color-abyss: #0b2140;
+  --color-abyss: #0a1a2f;
   --color-midnight: #0e2747;
-  --color-navy: #17365f;
-  --color-gold: #5fc9c2;
-  --color-gold-soft: #9be0da;
-  --color-ivory: #f3f8f9;
-  --color-sand: #e2eef1;
-  --color-ink: #0e2747;
-  --color-mist: #9db4c8;
+  --color-navy: #17365e;
+  --color-gold: #fd7113;
+  --color-gold-soft: #ff9a52;
+  --color-ivory: #fbfaf7;
+  --color-sand: #f1ece3;
+  --color-ink: #0a1a2f;
+  --color-mist: #b9c4d6;
 }
-html.theme-sky ::selection { color: #0b2140; }
-html.theme-sky .text-\[\#a67a4f\] { color: #17796f; }
-html.theme-sky .btn-gold, html.theme-sky .btn-gold:hover { color: #0b2140; }
+html.theme-sky ::selection { color: #0a1a2f; }
+html.theme-sky .text-\[\#a67a4f\] { color: #b04507; }
+html.theme-sky .btn-gold, html.theme-sky .btn-gold:hover { color: #0a1a2f; }
 
 /* ---------- Home 2 hero: full photo with a text layer that follows the pointer ---------- */
 .hero-follow {
