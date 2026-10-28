@@ -59,12 +59,12 @@ export default function HeroFull({ image, alt }: Props) {
         style={reduce ? undefined : { x: txtX, y: txtY }}
       >
         <motion.div
-          className="max-w-xl rounded-3xl border border-white/15 bg-abyss/50 p-6 backdrop-blur-md sm:p-8"
+          className="max-w-xl rounded-3xl border border-white/10 bg-abyss/25 p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,.5)] backdrop-blur-[6px] sm:p-8 [text-shadow:0_1px_16px_rgba(0,0,0,.35)]"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={t(0.3)}
         >
-          <p className="hidden font-heading text-xs uppercase tracking-[.22em] text-gold lg:block">Gastroenterology · San Antonio, TX</p>
+          <p className="hidden font-heading text-xs uppercase tracking-[.22em] text-ivory lg:block">Gastroenterology · San Antonio, TX</p>
 
           <div className="hero-follow relative lg:mt-4" onPointerMove={onLitMove}>
             <h1 className="text-balance font-heading text-[clamp(2rem,3.2vw,3rem)] font-light leading-[1.05] text-ivory">
